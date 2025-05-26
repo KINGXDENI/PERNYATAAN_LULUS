@@ -80,14 +80,14 @@
 <body style="background-color: #fff; color: #23486A;">
 
     <!-- HEADER -->
-  <header style="background-color: #23486A;" class="text-white py-6 shadow-md">
+  <header style="background-color: #23486A;" class="text-white py-6 px-3 shadow-md">
       <div class="container mx-auto flex items-center justify-center gap-4">
           <!-- Logo -->
           <img src="logo.png" alt="Logo Tut Wuri Handayani" class="w-16 h-16 object-contain" />
 
           <!-- Nama Sekolah -->
           <div class="text-center">
-              <h1 class="text-3xl font-bold uppercase tracking-wider">SD Negeri 13 Manggelewa</h1>
+              <h1 class="text-2xl sm:text-3xl font-bold uppercase tracking-wider">SD Negeri 13 Manggelewa</h1>
               <p class="text-sm mt-1">Jl. Lintas Kilo/Kore | Telp: (021) 12345678</p>
           </div>
               <img src="dompu.png" alt="Gambar Dompu" class="w-16 h-16 object-contain" />
@@ -131,35 +131,40 @@
 
 
              <!-- Form Input dan Tombol -->
-            <div id="form-container" class="text-center space-y-2">
-                <h2 class="text-3xl font-extrabold text-[#23486A]-600 mb-2">Selamat kepada Siswa Kelas VI Tahun Ajaran
-                    2024/2025!</h2>
-                <h2 class="text-2xl font-bold" style="color: #23486A;">Pernyataan Kelulusan</h2>
-                <p class="text-gray-600">Masukkan NISN Anda untuk melihat hasil kelulusan</p>
-                <div class="max-w-md mx-auto mt-4">
+            <div id="form-container" class="px-4 py-6 text-center space-y-4 max-w-xl mx-auto">
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-[#23486A]">Selamat kepada Siswa Kelas VI Tahun
+                    Ajaran 2024/2025!</h2>
+                <h2 class="text-xl sm:text-2xl font-bold text-[#23486A]">Pernyataan Kelulusan</h2>
+                <p class="text-gray-600 text-sm sm:text-base">Masukkan NISN Anda untuk melihat hasil kelulusan</p>
+
+                <div class="mt-4">
                     <input type="text" id="nisn" placeholder="Contoh: 1234567890"
-                        class="w-full px-4 py-3 border rounded-xl shadow focus:outline-none focus:ring-2 transition"
-                        style="border-color: #23486A; color: #23486A;">
+                        class="w-full max-w-md mx-auto px-4 py-3 border rounded-xl shadow focus:outline-none focus:ring-2 focus:ring-[#23486A] text-[#23486A] border-[#23486A]" />
                 </div>
+
                 <button id="btn-cek" onclick="cekKelulusan()"
-                    class="mt-4 px-6 py-2 text-white font-semibold rounded-xl transition shadow-md"
-                    style="background-color: #23486A;">Cek Kelulusan</button>
+                    class="mt-4 px-6 py-2 text-white font-semibold rounded-xl bg-[#23486A] hover:bg-[#1d3d58] transition shadow-md">
+                    Cek Kelulusan
+                </button>
             </div>
-            <div class="text-center text-sm text-gray-500 mt-2" id="kata">Sistem ini digunakan untuk mengecek status
-                kelulusan siswa kelas VI tahun ajaran 2024/2025 berdasarkan NISN yang dimasukkan. Jika data tidak
-                ditemukan, pastikan NISN sudah benar.</div>
+
+            <div id="kata" class="text-center text-xs sm:text-sm text-gray-500 mt-4 px-4 max-w-xl mx-auto">
+                Sistem ini digunakan untuk mengecek status kelulusan siswa kelas VI tahun ajaran 2024/2025 berdasarkan
+                NISN yang dimasukkan. Jika data tidak ditemukan, pastikan NISN sudah benar.
+            </div>
+
             <div id="hasil" class="hidden"></div>
         </div>
     </main>
 
     <!-- FOOTER -->
-    <footer style="background-color: #fff;" class="text-center py-4 mt-auto text-sm text-gray-600">
-        <p style="color: #23486A;">&copy; 2025 SD Negeri 13 Manggelewa. Semua hak dilindungi undang-undang.</p>
+    <footer style="background-color: #fff;" class="px-3 text-center py-4 mt-auto text-sm text-gray-600">
+        <p style="color: #23486A;">&copy; 2025 SD Negeri 13 Manggelewa</p>
     </footer>
 
     <!-- SCRIPT -->
     <script>
-       const targetDate = new Date('2025-06-02T00:00:00');
+       const targetDate = new Date('2025-05-26T00:00:00');
 
        const countdownCard = document.getElementById('countdown-card');
        const formContainer = document.getElementById('form-container');
@@ -171,14 +176,16 @@
        const minutesEl = document.getElementById('minutes');
        const secondsEl = document.getElementById('seconds');
 
-       formContainer.style.display = 'none';
-       kata.style.display = 'none';
+       formContainer.classList.add('hidden');
+       kata.classList.add('hidden');
 
        function updateCountdown() {
        const now = new Date();
 
        if (now >= targetDate) {
        countdownCard.style.display = 'none';
+        formContainer.classList.remove('hidden');
+        kata.classList.remove('hidden');
        clearInterval(intervalId);
        return;
        }
