@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pernyataan Kelulusan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #fff;
+            color: #23486A;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .serif-title {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .confetti {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes spin {
+        to {
+        transform: rotate(360deg);
+        }
+        }
+        .spinner {
+        border: 2px solid transparent;
+        border-top: 2px solid white;
+        border-radius: 50%;
+        width: 16px;
+        height: 16px;
+        animation: spin 0.6s linear infinite;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body style="background-color: #fff; color: #23486A;">
+
+    <!-- HEADER -->
+  <header style="background-color: #23486A;" class="text-white py-6 shadow-md">
+      <div class="container mx-auto flex items-center justify-center gap-4">
+          <!-- Logo -->
+          <img src="logo.png" alt="Logo Tut Wuri Handayani" class="w-16 h-16 object-contain" />
+
+          <!-- Nama Sekolah -->
+          <div class="text-center">
+              <h1 class="text-3xl font-bold uppercase tracking-wider">SD Negeri 13 Manggelewa</h1>
+              <p class="text-sm mt-1">Jl. Lintas Kilo/Kore | Telp: (021) 12345678</p>
+          </div>
+              <img src="dompu.png" alt="Gambar Dompu" class="w-16 h-16 object-contain" />
+      </div>
+  </header>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="flex items-center justify-center p-6">
+        <div class="rounded-3xl shadow-xl w-full max-w-4xl p-10 space-y-8 border"
+            style="background-color: #fff; border-color: #23486A;">
+             <!-- Card Hitung Mundur -->
+            <div id="countdown-card" 
+                class="max-w-md mx-auto bg-[#23486A] text-white rounded-3xl p-6 text-center shadow-lg">
+                <h2 class="text-2xl font-bold mb-4">MENUJU PENGUMUMAN KELULUSAN</h2>
+                 
+
+                <div id="countdown-grid" class="grid grid-cols-4 gap-4 justify-center items-center text-center">
+                    <div class="bg-[#2F5C84] p-4 rounded-xl">
+                        <div id="days" class="text-3xl font-mono font-bold">0</div>
+                        <div class="text-sm mt-1">Hari</div>
+                    </div>
+                    <div class="bg-[#2F5C84] p-4 rounded-xl">
+                        <div id="hours" class="text-3xl font-mono font-bold">00</div>
+                        <div class="text-sm mt-1">Jam</div>
+                    </div>
+                    <div class="bg-[#2F5C84] p-4 rounded-xl">
+                        <div id="minutes" class="text-3xl font-mono font-bold">00</div>
+                        <div class="text-sm mt-1">Menit</div>
+                    </div>
+                    <div class="bg-[#2F5C84] p-4 rounded-xl">
+                        <div id="seconds" class="text-3xl font-mono font-bold">00</div>
+                        <div class="text-sm mt-1">Detik</div>
+                    </div>
+                </div>
+
+                <p class="mt-4 text-sm opacity-80">Form pernyataan kelulusan bisa diakses saat hitung mundur selesai.
+                </p>
+            </div>
+
+
+             <!-- Form Input dan Tombol -->
+            <div id="form-container" class="text-center space-y-2">
+                <h2 class="text-3xl font-extrabold text-[#23486A]-600 mb-2">Selamat kepada Siswa Kelas VI Tahun Ajaran
+                    2024/2025!</h2>
+                <h2 class="text-2xl font-bold" style="color: #23486A;">Pernyataan Kelulusan</h2>
+                <p class="text-gray-600">Masukkan NISN Anda untuk melihat hasil kelulusan</p>
+                <div class="max-w-md mx-auto mt-4">
+                    <input type="text" id="nisn" placeholder="Contoh: 1234567890"
+                        class="w-full px-4 py-3 border rounded-xl shadow focus:outline-none focus:ring-2 transition"
+                        style="border-color: #23486A; color: #23486A;">
+                </div>
+                <button id="btn-cek" onclick="cekKelulusan()"
+                    class="mt-4 px-6 py-2 text-white font-semibold rounded-xl transition shadow-md"
+                    style="background-color: #23486A;">Cek Kelulusan</button>
+            </div>
+            <div class="text-center text-sm text-gray-500 mt-2" id="kata">Sistem ini digunakan untuk mengecek status
+                kelulusan siswa kelas VI tahun ajaran 2024/2025 berdasarkan NISN yang dimasukkan. Jika data tidak
+                ditemukan, pastikan NISN sudah benar.</div>
+            <div id="hasil" class="hidden"></div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer style="background-color: #fff;" class="text-center py-4 mt-auto text-sm text-gray-600">
+        <p style="color: #23486A;">&copy; 2025 SD Negeri 13 Manggelewa. Semua hak dilindungi undang-undang.</p>
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+       const targetDate = new Date('2025-06-02T00:00:00');
+
+       const countdownCard = document.getElementById('countdown-card');
+       const formContainer = document.getElementById('form-container');
+       const kata = document.getElementById('kata');
+       const btnCek = document.getElementById('btn-cek');
+
+       const daysEl = document.getElementById('days');
+       const hoursEl = document.getElementById('hours');
+       const minutesEl = document.getElementById('minutes');
+       const secondsEl = document.getElementById('seconds');
+
+       formContainer.style.display = 'none';
+       kata.style.display = 'none';
+
+       function updateCountdown() {
+       const now = new Date();
+
+       if (now >= targetDate) {
+       countdownCard.style.display = 'none';
+       clearInterval(intervalId);
+       return;
+       }
+
+       const diff = targetDate - now;
+
+       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+       const minutes = Math.floor((diff / (1000 * 60)) % 60);
+       const seconds = Math.floor((diff / 1000) % 60);
+
+       daysEl.textContent = days;
+       hoursEl.textContent = String(hours).padStart(2, '0');
+       minutesEl.textContent = String(minutes).padStart(2, '0');
+       secondsEl.textContent = String(seconds).padStart(2, '0');
+       }
+
+       const intervalId = setInterval(updateCountdown, 1000);
+       updateCountdown();
+
+
+        function showConfetti() {
+            const duration = 5 * 1000;
+            const end = Date.now() + duration;
+            const colors = ['#FFD166', '#00C9A7', '#FF61A6', '#ffffff', '#00C853'];
+            (function frame() {
+                confetti({
+                    particleCount: 5,
+                    angle: 60,
+                    spread: 55,
+                    origin: {
+                        x: 0
+                    },
+                    colors: colors
+                });
+                confetti({
+                    particleCount: 5,
+                    angle: 120,
+                    spread: 55,
+                    origin: {
+                        x: 1
+                    },
+                    colors: colors
+                });
+                if (Date.now() < end) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        }
+
+        function playLulusAudio() {
+            const audio = document.getElementById('lulus-audio');
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play();
+            }
+        }
+
+     async function cekKelulusan() {
+    const nisn = document.getElementById('nisn').value.trim();
+    const hasil = document.getElementById('hasil');
+    const kata = document.getElementById('kata');
+    const btn = document.getElementById('btn-cek');
+
+    if (!nisn) {
+        hasil.classList.add('hidden');
+        hasil.innerHTML = '';
+        kata.classList.remove('hidden');
+        return;
+    }
+
+    // Ubah tombol jadi loading
+    btn.disabled = true;
+    btn.innerHTML = `<span class="spinner"></span>Memproses...`;
+
+    hasil.classList.remove('hidden');
+    kata.classList.add('hidden');
+
+    try {
+        const url =
+        `https://script.google.com/macros/s/AKfycbxc4nH2BU-H4E93hUEtOkCJ92CBvQUm02GM-HRCT03eI7i-yIC7-kRqDE3j1c8EV5LqYA/exec?nisn=${encodeURIComponent(nisn)}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (data && data.success) {
+            const siswa = data;
+            let color = siswa.status === 'LULUS' ? 'green' : 'red';
+            let motivasi = siswa.status === 'LULUS' ?
+                "Teruslah berkarya dan kejar cita-citamu. Masa depan cerah menantimu!" :
+                "Jangan menyerah! Ini bukan akhir dari segalanya. Bangkit dan terus berusaha!";
+
+            hasil.innerHTML = `
+                <div class="fade-in-up max-w-2xl mx-auto bg-white shadow-xl rounded-3xl border-2 border-${color}-500 p-6 mt-6 text-center">
+                    <img src="${siswa.foto}" alt="Foto ${siswa.nama}" class="w-24 h-24 mx-auto rounded-full shadow mb-4 border-2 border-${color}-400">
+                    <h3 class="text-2xl font-bold text-${color}-600 mb-1">${siswa.status}</h3>
+                    <p class="text-lg font-semibold text-gray-800">${siswa.nama}</p>
+                    <p class="text-gray-600 text-sm">NISN: ${nisn}</p>
+                    <p class="text-gray-600 text-sm mb-4">TTL: ${siswa.ttl}</p>
+                    <div class="text-sm italic text-${color}-700 px-4 py-3 bg-${color}-50 rounded-xl border border-dashed border-${color}-400">
+                        "${motivasi}"
+                    </div>
+                </div>`;
+
+            if (siswa.status === 'LULUS') {
+                showConfetti?.();
+                playLulusAudio?.();
+            }
+        } else {
+            hasil.innerHTML = `
+                <div class="fade-in-up max-w-xl mx-auto bg-yellow-50 border-l-4 border-yellow-400 text-yellow-700 p-4 rounded-xl mt-6">
+                    <strong class="font-bold">Oops!</strong>
+                    <span class="block sm:inline"> Data tidak ditemukan. Pastikan NISN yang Anda masukkan benar.</span>
+                </div>`;
+        }
+    } catch (err) {
+        console.error('Error:', err);
+        hasil.innerHTML = `
+            <div class="fade-in-up max-w-xl mx-auto bg-red-50 border-l-4 border-red-400 text-red-700 p-4 rounded-xl mt-6">
+                <strong class="font-bold">Gagal!</strong>
+                <span class="block sm:inline"> Terjadi kesalahan saat mengambil data. Silakan coba lagi nanti.</span>
+            </div>`;
+    } finally {
+        // Reset tombol
+        btn.disabled = false;
+        btn.innerHTML = "Cek Kelulusan";
+    }
+}
+        
+        document.getElementById('nisn').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') cekKelulusan();
+        });
+    </script>
+
+</body>
+
+</html>
+<audio id="lulus-audio" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfa4c3b.mp3" preload="auto"></audio>
