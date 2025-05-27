@@ -209,7 +209,7 @@
 
 
         function showConfetti() {
-            const duration = 5 * 1000;
+            const duration = 10 * 1000;
             const end = Date.now() + duration;
             const colors = ['#FFD166', '#00C9A7', '#FF61A6', '#ffffff', '#00C853'];
             (function frame() {
@@ -342,4 +342,6 @@
 </body>
 
 </html>
-<audio id="lulus-audio" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfa4c3b.mp3" preload="auto"></audio>
+<audio id="lulus-audio" preload="auto">
+    <source src="/sound.mp3" type="audio/mpeg">
+</audio>

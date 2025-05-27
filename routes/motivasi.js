@@ -13,8 +13,8 @@ router.post('/', async (req, res) => {
     } = req.body;
 
     const prompt = status === 'LULUS' ?
-        "Buatkan kalimat motivasi yang membangkitkan semangat untuk siswa SD yang baru saja lulus." :
-        "Buatkan kalimat motivasi yang membesarkan hati untuk siswa SD yang belum lulus.";
+        "Buatkan kalimat motivasi pendek yang membangkitkan semangat untuk siswa SD yang baru saja lulus." :
+        "Buatkan kalimat motivasi pendek yang membesarkan hati untuk siswa SD yang belum lulus.";
 
     try {
         const model = genAI.getGenerativeModel({
