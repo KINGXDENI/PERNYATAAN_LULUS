@@ -309,6 +309,8 @@
                </div>`;
 
                             if (siswa.status === 'LULUS') {
+                                btn.disabled = false;
+                                btn.innerHTML = "Cek Kelulusan";
                                 showConfetti ?.();
                                 playLulusAudio ?.();
                             }
@@ -319,6 +321,8 @@
                     <strong class="font-bold">Oops!</strong>
                     <span class="block sm:inline"> Data tidak ditemukan. Pastikan NISN yang Anda masukkan benar.</span>
                 </div>`;
+                btn.disabled = false;
+                btn.innerHTML = "Cek Kelulusan";
                 }
             } catch (err) {
                 console.error('Error:', err);
@@ -327,11 +331,7 @@
                 <strong class="font-bold">Gagal!</strong>
                 <span class="block sm:inline"> Terjadi kesalahan saat mengambil data. Silakan coba lagi nanti.</span>
             </div>`;
-            } finally {
-                // Reset tombol
-                btn.disabled = false;
-                btn.innerHTML = "Cek Kelulusan";
-            }
+            } 
         }
 
         document.getElementById('nisn').addEventListener('keypress', function (e) {
