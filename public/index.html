@@ -88,8 +88,8 @@
 
             <!-- Nama Sekolah -->
             <div class="text-center">
-                <h1 class="text-2xl sm:text-3xl font-bold uppercase tracking-wider">SD Negeri 13 Manggelewa</h1>
-                <p class="text-sm mt-1">Jl. Lintas Kilo/Kore | Telp: (021) 12345678</p>
+                <h1 class="text-2xl sm:text-3xl font-bold uppercase tracking-wider">SD Negeri 07 Manggelewa</h1>
+                <p class="text-sm mt-1">Jalan Lintas Sumbawa Desa Soriutu Kecamatan Manggelewa Kabupaten Dompu-NTB</p>
             </div>
             <img src="dompu.png" alt="Gambar Dompu" class="w-16 h-16 object-contain" />
         </div>
@@ -160,12 +160,12 @@
 
     <!-- FOOTER -->
     <footer style="background-color: #fff;" class="px-3 text-center py-4 mt-auto text-sm text-gray-600">
-        <p style="color: #23486A;">&copy; 2025 SD Negeri 13 Manggelewa</p>
+        <p style="color: #23486A;">&copy; 2025 SD Negeri 07 Manggelewa</p>
     </footer>
 
     <!-- SCRIPT -->
     <script>
-        const targetDate = new Date('2025-06-02T01:00:00Z');
+        const targetDate = new Date('2025-06-02T02:00:00Z');
 
         const countdownCard = document.getElementById('countdown-card');
         const formContainer = document.getElementById('form-container');
@@ -267,7 +267,7 @@
 
             try {
                 const url =
-                    `https://script.google.com/macros/s/AKfycbxc4nH2BU-H4E93hUEtOkCJ92CBvQUm02GM-HRCT03eI7i-yIC7-kRqDE3j1c8EV5LqYA/exec?nisn=${encodeURIComponent(nisn)}`;
+                    `https://script.google.com/macros/s/AKfycbznhM1hlfpL96pzIPb3RZvT7BEZ0P87PLthmiYqe3iKAukJ6Yswx6d6RoF4KIzrv9k1/exec?nisn=${encodeURIComponent(nisn)}`;
                 const res = await fetch(url);
                 const data = await res.json();
 
@@ -296,12 +296,12 @@
                             hasil.innerHTML = `
                <div
                    class="fade-in-up max-w-2xl mx-auto bg-white shadow-xl rounded-3xl border-2 border-${color}-500 p-6 mt-6 text-center">
-                   <img src="${siswa.foto}" alt="Foto ${siswa.nama}"
+                   <img src="/foto/murid.png" alt="Foto ${siswa.nama}"
                        class="w-24 h-24 mx-auto rounded-full shadow mb-4 border-2 border-${color}-400">
                    <h3 class="text-2xl font-bold text-${color}-600 mb-1">${siswa.status}</h3>
                    <p class="text-lg font-semibold text-gray-800">${siswa.nama}</p>
                    <p class="text-gray-600 text-sm">NISN: ${nisn}</p>
-                   <p class="text-gray-600 text-sm mb-4">TTL: ${siswa.ttl}</p>
+                   <p class="text-gray-600 text-sm mb-4">KELAS: ${siswa.kelas}</p>
                    <div
                        class="text-sm italic text-${color}-700 px-4 py-3 bg-${color}-50 rounded-xl border border-dashed border-${color}-400">
                        "${motivasi}"
